@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    //evnvironment{
+        //PATH ="C:\workdir\softwares\apache-maven-3.8.4-bin\apache-maven-3.8.4\bin";
+    //}
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Pull Code from GIT') {
+            steps {
+                echo 'Pulling Code from GIT'
+                git 'https://github.com/gorambekarvijay/gorambekarvijay.git'
+            }
+        }
+        stage('build'){
+            steps {
+                echo "M2_HOME = ${M2_HOME}"
+                bat 'cd demo'
+                bat 'dir'
+                bat 'mvn -version'
+                bat 'java -version'
+                bat 'cd demo && mvn clean install'
+                
+            }
+        }
+    }
+}
